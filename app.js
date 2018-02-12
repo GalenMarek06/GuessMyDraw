@@ -27,9 +27,13 @@ class User {
 io.on('connection', function(socket){
   console.log('a user connected');
   listOfUsers.push(new User(socket.id))
-  console.info(`Client connected [id=${socket.id}]`);
-  sequenceNumberByClient.set(socket, 1);
-  console.log(listOfUsers);
+
+  for (var i = 0; i < listOfUsers.length; i++) {
+    if(listOfUsers[i].name){
+      io.emit('inscription',listOfUsers[i]);
+    }
+  }
+
   socket.on('canvas', function(msg){
     io.emit('canvas', msg);
   });
@@ -43,7 +47,7 @@ io.on('connection', function(socket){
   })
   socket.on("disconnect", () => {
     io.emit('desincription',socket.id);
-console.log('desincription');
+    console.log('desincription');
     sequenceNumberByClient.delete(socket);
     console.info(`Client gone [id=${socket.id}]`);
   });
