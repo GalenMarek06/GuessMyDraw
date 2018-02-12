@@ -14,9 +14,9 @@ function generateWord()
 
 
 function addUser(User){
-console.log($('#'+User.id).length);
-if($('#'+User.id).length==0)
-{
+  console.log($('#'+User.id).length);
+  if($('#'+User.id).length==0)
+  {
     let div = document.createElement('div')
     div.className = 'playerGame';
     let labName = document.createElement('label');
@@ -33,14 +33,24 @@ if($('#'+User.id).length==0)
   }
 }
 
+
+function send(){
+  socket.emit('inscription',$('#playerName').val());
+  $('#playerName').val('');
+
+}
+
 $('#playerInfo').submit(function(e){
   e.preventDefault();
-  console.log($('#playerName').val());
-  socket.emit('inscription',$('#playerName').val());
+  send();
   return;
+});
 
-} )
-;
+$('#btn_findGame').on('click',function(e){
+  send();
+  $('form').submit();
+});
+
 
 socket.on('inscription',function(data){
   console.log(data);
