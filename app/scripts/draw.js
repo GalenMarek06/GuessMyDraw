@@ -29,15 +29,15 @@ if(window.addEventListener) {
         return;
       }
 
+
       // Pencil tool instance.
       tool = new tool_pencil();
-
+      tool.strokeStyle  = "#FF0000";
       // Attach the mousedown, mousemove and mouseup event listeners.
       canvas.addEventListener('mousedown', ev_canvas, false);
       canvas.addEventListener('mousemove', ev_canvas, false);
       canvas.addEventListener('mouseup',   ev_canvas, false);
       socket.on('canvas',function(msg){
-        console.log('canvas reciving');
         deserialize(msg,canvas);
       })
 
@@ -63,6 +63,8 @@ if(window.addEventListener) {
       // This is called when you start holding down the mouse button.
       // This starts the pencil drawing.
       this.mousedown = function (ev) {
+
+
         if (ev._x > canvas.width&&ev._y>canvas.height){
           context.moveTo(ev.offsetX, ev.offsetY);
           context.beginPath();
@@ -81,9 +83,14 @@ if(window.addEventListener) {
       // draws if the tool.started state is set to true (when you are holding down
       // the mouse button).
       this.mousemove = function (ev) {
+
         if (tool.started) {
+          // context.fillStyle  = "#FF0000";
+          context.strokeStyle  = "#FF0000";
+          context.lineWidth = "10";
           if (ev._x < canvas.width && ev._y < canvas.height) {
             context.lineTo(ev._x, ev._y);
+
             context.stroke();
           }
           else {
@@ -91,6 +98,7 @@ if(window.addEventListener) {
             context.stroke();
 
           }
+
         }
       };
 
