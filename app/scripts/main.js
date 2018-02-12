@@ -1,9 +1,7 @@
 
-$( document ).ready(function() 
+$( document ).ready(function()
 {
     $("#btn_GenerateWord").on("click",generateWord);
-
-<<<<<<< HEAD
 
 var canvas = document.getElementById("canvasWordToDraw"),
 context = canvas.getContext("2d"),
@@ -40,7 +38,7 @@ canvas.addEventListener("mouseup", function(e){
   context.closePath();
   draw = false;
 });
-=======
+
     function generateWord()
     {
         console.log("click");
@@ -48,4 +46,3 @@ canvas.addEventListener("mouseup", function(e){
     }
 
 });
->>>>>>> 4ce9cfcc5cba86194dbe833c3cbf8df42255c5d4
