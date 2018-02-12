@@ -48,7 +48,10 @@ io.on('connection', function(socket){
   socket.on("disconnect", () => {
     io.emit('desincription',socket.id);
     console.log('desincription');
+    let obj = listOfUsers.find(o => o.id === socket.id);
+    remove(listOfUsers,obj);
     sequenceNumberByClient.delete(socket);
+
     console.info(`Client gone [id=${socket.id}]`);
   });
 });
@@ -56,3 +59,10 @@ io.on('connection', function(socket){
 server.listen(4200, function(){
   console.log('listening on *:4200');
 });
+
+
+
+function remove(array, element) {
+    const index = array.indexOf(element);
+    array.splice(index, 1);
+}
