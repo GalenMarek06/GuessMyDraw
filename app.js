@@ -42,6 +42,8 @@ io.on('connection', function(socket){
     io.emit('inscription',obj);
   })
   socket.on("disconnect", () => {
+    io.emit('desincription',socket.id);
+console.log('desincription');
     sequenceNumberByClient.delete(socket);
     console.info(`Client gone [id=${socket.id}]`);
   });

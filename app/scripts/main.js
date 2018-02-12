@@ -25,7 +25,7 @@ function addUser(User){
   div.id = User.id;
   div.append(labName);
   div.append(labStatus);
-  $('.guessMyDrawContainer').append(div);
+  $('#playersList').append(div);
 
 }
 
@@ -41,4 +41,11 @@ $('#playerInfo').submit(function(e){
 socket.on('inscription',function(data){
   console.log(data);
   addUser(data);
+})
+
+
+socket.on('desincription',function(id){
+console.log('desinscription');
+  $('#'+id).remove();
+
 })
