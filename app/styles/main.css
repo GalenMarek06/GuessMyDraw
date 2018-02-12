@@ -1,0 +1,184 @@
+
+section
+{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  width:100vw;
+  height:100vh;
+  font-family: 'Bangers', cursive;
+
+}
+
+.guessMyDrawContainer
+{
+    background-color: grey;
+    width:70vw;
+    height: 70vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+
+#titleMain
+{
+  width: 100%;
+  height: 20vh;
+
+}
+
+#playerInfo
+{
+  margin-bottom: 10vh;
+}
+
+#playerInfo label
+{
+  font-family: 'Bangers', cursive;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+
+#playerInfo input[name="playerName"] 
+{
+  background-color: white;
+  width:100%;
+}
+
+#mainScreen #btn_findGame , #findWordScreen  #btn_GenerateWord
+{
+  font-family: 'Bangers', cursive;
+  font-weight: bold;
+  font-size: 30px;
+  background-color: red;
+  width:50%;
+  height:5vh;
+  text-align: center;
+  padding-top:10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+
+.guessMyDrawContainer_left
+{
+    background-color: grey;
+    width:50vw;
+    height: 50vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#playersRoomHeader
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  
+}
+
+#playersRoomHeader #playersAvailable
+{
+  width:80%;
+  border-bottom: 2px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+#playersRoomHeader #playersStatus
+{
+  width:20%;
+  border-bottom: 2px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+.playerGame
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.playerGame .playerName
+{
+  width:80%;
+   border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+.playerGame .playerConnection
+{
+  width:20%;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+#infoSession
+{
+  font-size:30px;
+  margin-top: 50px;
+}
+
+#titleSession, #titleFindWord, #titleDrawWord, #titleGuessWord
+{
+  color: #5b7cd3;
+  padding: 10px;
+  font-size: 45px;
+  -webkit-text-stroke: 2px black;
+}
+
+
+
+.card-container {
+  cursor: pointer;
+  height: 150px;
+  perspective: 600;
+  position: relative;
+  width: 150px;
+}
+
+.card {
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  width: 100%;
+}
+.card:hover {
+  transform: rotateY(180deg);
+}
+.card .side {
+  backface-visibility: hidden;
+  border-radius: 6px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+.card .back {
+  background: #eaeaed;
+  color: #0087cc;
+  line-height: 150px;
+  text-align: center;
+  transform: rotateY(180deg);
+}

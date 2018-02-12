@@ -1,0 +1,15 @@
+{
+  "name": "javascript-tp2-audiowebapp",
+  "version": "1.0.0",
+  "description": "SoundKit Web app with HTML5 audio API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "François Michaudon, Hugo Mallet",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
