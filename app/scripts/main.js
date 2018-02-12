@@ -1,6 +1,9 @@
 
-'use strict';
+$( document ).ready(function() 
+{
+    $("#btn_GenerateWord").on("click",generateWord);
 
+<<<<<<< HEAD
 
 var canvas = document.getElementById("canvasWordToDraw"),
 context = canvas.getContext("2d"),
@@ -37,3 +40,12 @@ canvas.addEventListener("mouseup", function(e){
   context.closePath();
   draw = false;
 });
+=======
+    function generateWord()
+    {
+        console.log("click");
+       $('.card').css('transform', 'rotateY(180deg)');
+    }
+
+});
+>>>>>>> 4ce9cfcc5cba86194dbe833c3cbf8df42255c5d4
