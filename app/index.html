@@ -23,7 +23,7 @@
                  <form id="playerInfo">
                      <label>Votre nom:</label><br>
                      <input type="text" id="playerName"><br>
-                     <input type="submit" id="btn_findGame">Trouver partie </div>
+                     <input type="submit" id="btn_findGame" class="button">Trouver partie </div>
 
                 </form>
             </div>
@@ -42,7 +42,7 @@
         <section id="gameScreen">
             <div id="findWordScreen" class= "guessMyDrawContainer">
                <span id="titleFindWord"> Quel mot allez vous dessiner? </span>
-               <div id="btn_GenerateWord">Generer Mot</div>
+               <div id="btn_GenerateWord" class="button">Generer Mot</div>
                <div class="card-container">
                   <div class="card">
                        <!-- <div class="side"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/29841/jimmy.jpg" alt="Jimmy Eat World"></div> -->
@@ -67,9 +67,11 @@
                 <canvas id="canvasWordToGuess" width="400" height="400" style="border:1px solid #000000;">
                 </canvas>
                 <div id= "playerResponse">
+                    <div id="clear" class="button">Efacer</div>
+                    <br />
                     <span id="titleResponse"> Votre réponse : </span>
                     <input type="text" name="inputResponse"><br>
-                    <div id="btn_Submit">Valider</div>
+                    <div id="btn_Submit" class="button">Valider</div>
                 </div>
             </div>
         </section>

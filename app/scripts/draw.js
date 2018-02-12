@@ -54,6 +54,11 @@ if(window.addEventListener) {
       }
     }
 
+
+    $('#clear').click(function(e){
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      socket.emit('canvas', canvas.toDataURL());
+    })
     // This painting tool works like a drawing pencil which tracks the mouse
     // movements.
     function tool_pencil () {

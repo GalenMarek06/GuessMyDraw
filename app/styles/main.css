@@ -51,7 +51,7 @@ section
   width:100%;
 }
 
-#mainScreen #btn_findGame , #findWordScreen  #btn_GenerateWord
+#mainScreen #btn_findGame , #findWordScreen  #btn_GenerateWord, .button
 {
   color:#ffd101;
   font-family: 'Bangers', cursive;
