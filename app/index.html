@@ -9,7 +9,7 @@
         <title>GuessMyDraw</title>
 
         <link rel="stylesheet" href="styles/main.css" />
-        <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">       
+        <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,7 +19,7 @@
     <body>
         <section id="mainScreen">
             <div class= guessMyDrawContainer>
-                 <img id="titleMain" src="images/GuessMyDraw.png" alt="Smiley face"> 
+                 <img id="titleMain" src="images/GuessMyDraw.png" alt="Smiley face">
                  <div id="playerInfo">
                      <label>Votre nom:</label><br>
                      <input type="text" name="playerName"><br>
@@ -29,7 +29,7 @@
         </section>
         <section id="playersRoomScreen">
             <div class= "guessMyDrawContainer">
-                 <span id="titleSession">Recherche de partie</span> 
+                 <span id="titleSession">Recherche de partie</span>
                  <div id="playersRoomHeader">
                     <label id="playersAvailable">Joueurs</label>
                     <label id="playersStatus">Status</label>
@@ -45,7 +45,7 @@
                  <span id="infoSession"> La partie va commencer... </span>
             </div>
         </section>
-        
+
 
         <section id="gameScreen">
             <div id="findWordScreen" class= "guessMyDrawContainer">
@@ -66,16 +66,14 @@
             <div id="drawWordScreen" class= "guessMyDrawContainer">
                 <span id="titleDrawWord"> Dessinez le mot </span>
                 <span id="wordToDraw"> VOITURE </span>
-               
-                <canvas id="canvasWordToDraw" width="400" height="400" style="border:1px solid #000000;">
-                </canvas> 
+
             </div>
             <div id="guessWordScreen" class= "guessMyDrawContainer">
                 <div id="guessHeader">
                     <span id="titleGuessWord"> Devinez le mot </span>
                 </div>
                 <canvas id="canvasWordToGuess" width="400" height="400" style="border:1px solid #000000;">
-                </canvas> 
+                </canvas>
                 <div id= "playerResponse">
                     <span id="titleResponse"> Votre réponse : </span>
                     <input type="text" name="inputResponse"><br>
@@ -87,6 +85,8 @@
 
 
         <script src="scripts/main.js"></script>
+        <script src="scripts/draw.js"></script>
+
     </body>
 
 </html>

@@ -45,7 +45,7 @@ section
 }
 
 
-#playerInfo input[name="playerName"] 
+#playerInfo input[name="playerName"]
 {
   background-color: white;
   width:100%;
@@ -94,7 +94,7 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
   flex-direction: row;
   font-size: 25px;
   font-weight: bold;
-  
+
 }
 
 #playersRoomHeader #playersAvailable
@@ -246,9 +246,4 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
   line-height: 300px;
   text-align: center;
   transform: rotateY(180deg);
-}
-
-#canvasWordToDraw, #canvasWordToGuess
-{
-  width:80%;
 }
