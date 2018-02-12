@@ -36,6 +36,22 @@ if(window.addEventListener) {
       canvas.addEventListener('mousedown', ev_canvas, false);
       canvas.addEventListener('mousemove', ev_canvas, false);
       canvas.addEventListener('mouseup',   ev_canvas, false);
+      socket.on('canvas',function(msg){
+        console.log('canvas reciving');
+        deserialize(msg,canvas);
+      })
+
+      function deserialize(data, canvas) {
+        var img = new Image();
+        img.onload = function() {
+
+          canvas.width = img.width;
+          canvas.height = img.height;
+          canvas.getContext("2d").drawImage(img, 0, 0);
+        };
+
+        img.src = data;
+      }
     }
 
     // This painting tool works like a drawing pencil which tracks the mouse
@@ -47,21 +63,10 @@ if(window.addEventListener) {
       // This is called when you start holding down the mouse button.
       // This starts the pencil drawing.
       this.mousedown = function (ev) {
-        console.log(canvas.width);
-        console.log("mouse down ev x "+ ev._x);
-        console.log("mouse down ev y "+ ev._y);
-        console.log("offsetX"+ ev.offsetX);
-        console.log("offsetY"+ ev.offsetY);
-
-        console.log(ev);
-
         if (ev._x > canvas.width&&ev._y>canvas.height){
           context.moveTo(ev.offsetX, ev.offsetY);
           context.beginPath();
           tool.started = true;
-
-
-
         }
         else {
           context.moveTo(ev._x, ev._y);
@@ -77,15 +82,12 @@ if(window.addEventListener) {
       // the mouse button).
       this.mousemove = function (ev) {
         if (tool.started) {
-          console.log("mouse down ev x "+ ev._x);
-          console.log("mouse down ev y "+ ev._y);
-          console.log("offsetX"+ ev.offsetX);
-          console.log("offsetY"+ ev.offsetY);
           if (ev._x < canvas.width && ev._y < canvas.height) {
             context.lineTo(ev._x, ev._y);
             context.stroke();
           }
-          else {          context.lineTo(ev.offsetX, ev.offsetY);
+          else {
+            context.lineTo(ev.offsetX, ev.offsetY);
             context.stroke();
 
           }
@@ -94,12 +96,11 @@ if(window.addEventListener) {
 
       // This is called when you release the mouse button.
       this.mouseup = function (ev) {
+
         if (tool.started) {
           tool.mousemove(ev);
           tool.started = false;
-
           socket.emit('canvas', canvas.toDataURL());
-
         }
       };
     }

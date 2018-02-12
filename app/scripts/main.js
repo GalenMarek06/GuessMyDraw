@@ -1,11 +1,11 @@
 
 
-  $("#btn_GenerateWord").on("click",generateWord);
+$("#btn_GenerateWord").on("click",generateWord);
 
 
 
-  function generateWord()
-  {
-    console.log("click");
-    $('.card').css('transform', 'rotateY(180deg)');
-  }
+function generateWord()
+{
+  console.log("click");
+  $('.card').css('transform', 'rotateY(360deg)');
+}

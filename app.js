@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
-var socket = require('socket.io')(server);
+var io = require('socket.io')(server);
 let sequenceNumberByClient = new Map();
 
 app.use(express.static(__dirname + '/app'));
@@ -12,13 +12,14 @@ app.get('/', function(req, res,next) {
 
 
 
-socket.on('connection', function(socket){
+io.on('connection', function(socket){
   console.log('a user connected');
   console.info(`Client connected [id=${socket.id}]`);
   sequenceNumberByClient.set(socket, 1);
 
   socket.on('canvas', function(msg){
-    socket.emit('canvas', msg);
+    console.log('canvas sending');
+    io.emit('canvas', msg);
   });
   socket.on("disconnect", () => {
           sequenceNumberByClient.delete(socket);
