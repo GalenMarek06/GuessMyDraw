@@ -6,6 +6,7 @@
 if(window.addEventListener) {
 window.addEventListener('load', function () {
   var canvas, context, tool;
+  var socket = io();
 
   function init () {
     // Find the canvas element.
@@ -47,7 +48,6 @@ console.log('init');
     // This is called when you start holding down the mouse button.
     // This starts the pencil drawing.
     this.mousedown = function (ev) {
-console.log('mousedown');
         context.beginPath();
         context.moveTo(ev._x, ev._y);
         tool.started = true;
@@ -57,7 +57,6 @@ console.log('mousedown');
     // draws if the tool.started state is set to true (when you are holding down
     // the mouse button).
     this.mousemove = function (ev) {
-console.log("ev x" + ev._x);
       if (tool.started) {
         context.lineTo(ev._x, ev._y);
         context.stroke();
@@ -69,6 +68,9 @@ console.log("ev x" + ev._x);
       if (tool.started) {
         tool.mousemove(ev);
         tool.started = false;
+
+      socket.emit('canvas', canvas.toDataURL());
+
       }
     };
   }
@@ -76,7 +78,6 @@ console.log("ev x" + ev._x);
   // The general-purpose event handler. This function just determines the mouse
   // position relative to the canvas element.
   function ev_canvas (ev) {
-console.log(ev);
     if (ev.layerX || ev.layerX == 0) { // Firefox
       ev._x = ev.layerX;
       ev._y = ev.layerY;
@@ -91,6 +92,11 @@ console.log(ev);
       func(ev);
     }
   }
+
+
+
+
+
 
   init();
 

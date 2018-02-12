@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Paint</title>
-  </head>
-  <body>
-    <canvas id="canvasWordToGuess" width="400" height="400" style="border:1px solid #000000;">
-    </canvas>
-  </body>
-  <script src="scripts/draw.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Paint</title>
+  <script   src="http://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+</head>
+<body>
+  <canvas id="canvasWordToGuess" width="400" height="400" style="border:1px solid #000000;">
+  </canvas>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./scripts/draw.js"></script>
 
+<script>
+var socket = io();
+var canvas = document.getElementById('canvasWordToGuess');
+var context = canvas.getContext('2d');
+
+socket.on('canvas',function(msg){
+  deserialize(msg,canvas);
+})
+
+
+
+
+function deserialize(data, canvas) {
+  var img = new Image();
+  img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    canvas.getContext("2d").drawImage(img, 0, 0);
+  };
+
+  img.src = data;
+}
+</script>
+
+
+<script   src="http://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 </html>
