@@ -19,11 +19,11 @@ console.log(__dirname);
 console.log(process.cwd());
 
 app.get('/word', function (req, res) {
-	let fs = require("fs");
-	var text = fs.readFileSync(__dirname+"/dico.txt").toString('utf-8');
-	var textByLine = text.split("\n")
-	let rand = Math.floor(Math.random() * (textByLine.length - 1));
-	res.send(textByLine[rand]);
+  let fs = require("fs");
+  var text = fs.readFileSync(__dirname+"/dico.txt").toString('utf-8');
+  var textByLine = text.split("\n")
+  let rand = Math.floor(Math.random() * (textByLine.length - 1));
+  res.send(textByLine[rand]);
 });
 
 class User {
@@ -55,6 +55,30 @@ io.on('connection', function(socket){
     console.log(obj);
     io.emit('inscription',obj);
   })
+
+
+  socket.on('hey',function(msg){
+  console.log('hey reception');
+  console.log(socket.id);
+  console.log(msg);
+  socket.broadcast.to(msg).emit('hey',socket.id);
+
+})
+
+
+
+socket.on('pairfing',(msg)=>{
+console.log('pairing');
+  let obj = listOfUsers.find(o => o.id === socket.id);
+  listOfUsers[listOfUsers.indexOf(obj)].nemesis = msg;
+  let obj2 = listOfUsers.find(o => o.id === msg);
+  listOfUsers[listOfUsers.indexOf(obj)].nemesis = socket.id;
+  console.log(listOfUsers);
+})
+
+
+
+
   socket.on("disconnect", () => {
     io.emit('desincription',socket.id);
     console.log('desincription');
@@ -73,6 +97,6 @@ server.listen(4200, function(){
 
 
 function remove(array, element) {
-    const index = array.indexOf(element);
-    array.splice(index, 1);
+  const index = array.indexOf(element);
+  array.splice(index, 1);
 }
