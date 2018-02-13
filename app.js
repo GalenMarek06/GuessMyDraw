@@ -11,9 +11,19 @@ var status = {
 };
 
 
-app.use(express.static(__dirname + '/app'));
+app.use('/',express.static(__dirname + '/app'));
 app.get('/', function(req, res,next) {
   res.sendFile(__dirname + '/paint.html');
+});
+console.log(__dirname);
+console.log(process.cwd());
+
+app.get('/word', function (req, res) {
+	let fs = require("fs");
+	var text = fs.readFileSync(__dirname+"/dico.txt").toString('utf-8');
+	var textByLine = text.split("\n")
+	let rand = Math.floor(Math.random() * (textByLine.length - 1));
+	res.send(textByLine[rand]);
 });
 
 class User {

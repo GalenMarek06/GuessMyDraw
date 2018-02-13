@@ -10,6 +10,9 @@ function generateWord()
 {
   console.log("click");
   $('.card').css('transform', 'rotateY(360deg)');
+  $.get( "./word", function( data ) {
+    $( "#wordToDraw" ).text( data );
+  });
 }
 
 
@@ -55,7 +58,7 @@ $('#btn_findGame').on('click',function(e){
 socket.on('inscription',function(data){
   console.log(data);
   addUser(data);
-})
+});
 
 
 socket.on('desincription',function(id){
