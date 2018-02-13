@@ -251,6 +251,18 @@ transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 
+#btn_GenerateWord {
+-webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+}
+
+
 #canvasWordToDraw, #canvasWordToGuess
 {
   background-color: white;

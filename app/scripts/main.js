@@ -9,10 +9,15 @@ $("#btn_GenerateWord").on("click",generateWord);
 function generateWord()
 {
   console.log("click");
-  $('.card').css('transform', 'rotateY(360deg)');
+  if (  $( '#btn_GenerateWord' ).css( "transform" ) == 'none' ){
+         $('#btn_GenerateWord').css("transform","rotateY(360deg)");
+     } else {
+         $('#btn_GenerateWord').css("transform","" );
+     }
   $.get( "./word", function( data ) {
     $( "#wordToDraw" ).text( data );
   });
+
 }
 
 
