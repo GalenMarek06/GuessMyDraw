@@ -38,9 +38,10 @@ function addUser(User){
 
 
 function send(){
-  socket.emit('inscription',$('#playerName').val());
-  $('#playerName').val('');
-
+  if($('#playerName').val()){
+    socket.emit('inscription',$('#playerName').val());
+    $('#playerName').val('');
+  }
 }
 
 $('#playerInfo').submit(function(e){
