@@ -71,6 +71,21 @@ io.on('connection', function(socket){
 
 
 
+  socket.on('wordGuessTest',function(msg){
+    console.log('wordGuessTest');
+    let wordToGuess = listOfUsers.find(o => o.id === socket.id).word;
+    if(wordGuessTest==msg)
+    {
+      console.log("MOT TROUVE!!!!!!!!!!!!!");
+    }
+    console.log(obj);
+    io.emit('wordToGuess',obj);
+  })
+
+  
+
+
+
   socket.on('hey',function(msg){
   console.log('hey reception');
   console.log(socket.id);

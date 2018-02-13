@@ -54,6 +54,16 @@ function saveWordToGuess()
 }
 
 
+function testWordToGuess()
+{
+ if($("input[name='inputResponse']").val())
+  {
+    socket.emit('wordGuessTest',$("input[name='inputResponse']").val().trim().toLowerCase());
+  }
+}
+
+
+
 function send()
 {
   if($('#playerName').val())
