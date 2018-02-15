@@ -116,8 +116,6 @@ $( document ).ready(function() {
               $('#' + socket.id + ' > .playerConnection').text('en jeu');
             }
 
-
-
           })
 
           socket.on('inscription',function(data){
@@ -169,6 +167,9 @@ $( document ).ready(function() {
       socket.on('draw_line', function (data) {
           var line = data.line;
           console.log("dataLine Recupere PROJECT: " , line);
+           
+          contextToGuess.strokeStyle =data.color;
+          contextToGuess.lineWidth =data.width;
           contextToGuess.beginPath();
           contextToGuess.moveTo(line[0].x , line[0].y );
           contextToGuess.lineTo(line[1].x , line[1].y );
@@ -180,8 +181,8 @@ $( document ).ready(function() {
           // check if the user is drawing
           if (mouse.click && mouse.move && mouse.pos_prev) {
              // send line to to the server
-
-             socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
+              console.log("COULEUR TRAIT: " , canvasToDraw[0].strokeStyle);
+             socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] , color:contextToDraw.strokeStyle, width: contextToDraw.lineWidth });
              mouse.move = false;
           }
           mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};

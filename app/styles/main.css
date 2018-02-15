@@ -188,7 +188,6 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
 
 
 .card-container {
-  cursor: pointer;
   height: 300px;
   perspective: 600;
   position: relative;
@@ -258,14 +257,34 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
 
 #controlsDrawing
 {
+
   display: flex;
   flex-direction: row;
-  justify-content:center;
+  justify-content:space-evenly;
   align-content: center;
   align-items: center;
+  width:50%;
+  margin:2%;
 }
 
-#controlsDrawing
+#controlsDrawing > input,
+#controlsDrawing .drawWidth
+
+{
+  width: 15%;
+  background-color: #5571db;
+  text-align: center;
+  padding:1%;
+  border: 2px solid black;
+}
+
+#controlsDrawing .drawWidth:hover
+{
+  cursor:pointer;
+  background-color: #899ce3;
+}
+
+#playerResponse
 {
   display: flex;
   flex-direction: row;
@@ -273,15 +292,27 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
   align-content: center;
   align-items: center;
   width:50%;
+  margin:2%;
 }
 
-#controlsDrawing > input,
-#controlsDrawing #line_Wmin,
-#controlsDrawing #line_Wnormal,
-#controlsDrawing #line_Wlarge
+
+#playerResponse > input,
+#playerResponse #titleResponse
+{
+  width: 25%;
+}
+
+#playerResponse > input,
+#playerResponse #titleResponse
+{
+  width: 30%;
+}
+
+#playerResponse #btn_Submit
 {
   width: 15%;
-  background-color: blue;
+  background-color: #5571db;
   text-align: center;
   padding:1%;
+  border: 2px solid black;
 }

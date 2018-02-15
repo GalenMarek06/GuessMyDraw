@@ -151,7 +151,7 @@ io.on('connection', function (socket) {
       line_history.push(data.line);
       // send line to all clients
       console.log("SENDLine")
-      io.emit('draw_line', { line: data.line });
+      io.emit('draw_line', { line: data.line, color: data.color, width: data.width });
          console.log("SENTLine")
    });
 });

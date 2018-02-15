@@ -7,6 +7,7 @@ if(window.addEventListener) {
   window.addEventListener('load', function () {
     var canvas, canvasToGuess, context, tool;
     var socket = io();
+    var lineWidthDraw = "2";
 
     function init () {
       // Find the canvas element.
@@ -85,6 +86,13 @@ if(window.addEventListener) {
 
       };
 
+
+      $("#controlsDrawing .drawWidth").on("click", function(event)
+      {
+          lineWidthDraw = $(event.target).attr("data-width");
+          console.log("NOUVELLE EPAISSEUR" , lineWidthDraw);
+      });
+
       // This function is called every time you move the mouse. Obviously, it only
       // draws if the tool.started state is set to true (when you are holding down
       // the mouse button).
@@ -93,7 +101,8 @@ if(window.addEventListener) {
         if (tool.started) {
           // context.fillStyle  = "#FF0000";
           context.strokeStyle  = $('input[type=color]').val();
-          context.lineWidth = "2";
+
+          context.lineWidth = lineWidthDraw;
           if (ev._x < canvas.width && ev._y < canvas.height) {
             context.lineTo(ev._x, ev._y);
             context.stroke();
@@ -101,7 +110,6 @@ if(window.addEventListener) {
           else {
             context.lineTo(ev.offsetX, ev.offsetY);
             context.stroke();
-
           }
 
         }
