@@ -5,13 +5,14 @@
 // Keep everything in anonymous function, called on window load.
 if(window.addEventListener) {
   window.addEventListener('load', function () {
-    var canvas, context, tool;
+    var canvas, canvasToGuess, context, tool;
     var socket = io();
 
     function init () {
       // Find the canvas element.
 
-      canvas = document.getElementById('canvasWordToGuess');
+      canvas = document.getElementById('canvasWordToDraw');
+      canvasToGuess = document.getElementById('canvasWordToGuess');
       if (!canvas) {
         alert('Error: I cannot find the canvas element!');
         return;
@@ -38,7 +39,7 @@ if(window.addEventListener) {
       canvas.addEventListener('mousemove', ev_canvas, false);
       canvas.addEventListener('mouseup',   ev_canvas, false);
       socket.on('canvas',function(msg){
-        deserialize(msg,canvas);
+        deserialize(msg,canvasToGuess);
       })
 
       function deserialize(data, canvas) {

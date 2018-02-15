@@ -9,10 +9,10 @@ $("#btn_GenerateWord").on("click",generateWord);
 function generateWord()
 {
   console.log("click");
-  if (  $( '#btn_GenerateWord' ).css( "transform" ) == 'none' ){
-    $('#btn_GenerateWord').css("transform","rotateY(360deg)");
+  if (  $( '.card' ).css( "transform" ) == 'none' ){
+    $('.card').css("transform","rotateY(360deg)");
   } else {
-    $('#btn_GenerateWord').css("transform","" );
+    $('.card').css("transform","" );
   }
   $.get( "./word", function( data ) {
     $( "#wordToDraw" ).text( data );
@@ -44,8 +44,30 @@ function addUser(User){
 }
 
 
-function send(){
-  if($('#playerName').val()){
+
+function saveWordToGuess()
+{
+  if($("#wordToDraw").val())
+  {
+    socket.emit('wordRequest',$("#wordToDraw").val());
+  }
+}
+
+
+function testWordToGuess()
+{
+ if($("input[name='inputResponse']").val())
+  {
+    socket.emit('wordGuessTest',$("input[name='inputResponse']").val().trim().toLowerCase());
+  }
+}
+
+
+
+function send()
+{
+  if($('#playerName').val())
+  {
     socket.emit('inscription',$('#playerName').val());
     $('#playerName').val('');
   }

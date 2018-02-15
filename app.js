@@ -4,6 +4,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 let sequenceNumberByClient = new Map();
+let wordToGuess;
 let listOfUsers = []
 var status = {
   CONNECTED : {value: 1, name: "Connecté"},
@@ -23,7 +24,8 @@ app.get('/word', function (req, res) {
   var text = fs.readFileSync(__dirname+"/dico.txt").toString('utf-8');
   var textByLine = text.split("\n")
   let rand = Math.floor(Math.random() * (textByLine.length - 1));
-  res.send(textByLine[rand]);
+  wordToGuess = textByLine[rand];
+  res.send(wordToGuess);
 });
 
 class User {
@@ -57,6 +59,33 @@ io.on('connection', function(socket){
   })
 
 
+  socket.on('wordRequest',function(msg){
+    console.log('wordRequest');
+    let obj = listOfUsers.find(o => o.id === socket.id);
+    obj.word= msg;
+    let obj2 =listOfUsers.find(o => o.id === socket.id).nemesis;
+    obj2.word = msg;
+    console.log(obj);
+    io.emit('wordToGuess',obj);
+  })
+
+
+
+  socket.on('wordGuessTest',function(msg){
+    console.log('wordGuessTest');
+    let wordToGuess = listOfUsers.find(o => o.id === socket.id).word;
+    if(wordGuessTest==msg)
+    {
+      console.log("MOT TROUVE!!!!!!!!!!!!!");
+    }
+    console.log(obj);
+    io.emit('wordToGuess',obj);
+  })
+
+  
+
+
+
   socket.on('hey',function(msg){
   console.log('hey reception');
   console.log(socket.id);
@@ -72,7 +101,7 @@ console.log('pairing');
   let obj = listOfUsers.find(o => o.id === socket.id);
   listOfUsers[listOfUsers.indexOf(obj)].nemesis = msg;
   let obj2 = listOfUsers.find(o => o.id === msg);
-  listOfUsers[listOfUsers.indexOf(obj)].nemesis = socket.id;
+  listOfUsers[listOfUsers.indexOf(obj2)].nemesis = socket.id;
   console.log(listOfUsers);
 })
 
