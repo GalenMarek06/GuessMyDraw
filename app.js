@@ -46,47 +46,47 @@ io.on('connection', function(socket){
     }
   }
 
- /* socket.on('canvas', function(msg){
-    io.emit('canvas', msg);
-  });*/
+  /* socket.on('canvas', function(msg){
+  io.emit('canvas', msg);
+});*/
 
-  socket.on('inscription',function(msg){
-    console.log('inscription');
-    let obj = listOfUsers.find(o => o.id === socket.id);
-    obj.name = msg;
-    console.log(obj);
-    io.emit('inscription',obj);
-  })
-
-
-  socket.on('wordRequest',function(msg){
-    console.log('wordRequest');
-    let obj = listOfUsers.find(o => o.id === socket.id);
-    obj.word= msg;
-    let obj2 =listOfUsers.find(o => o.id === socket.id).nemesis;
-    obj2.word = msg;
-    console.log(obj);
-    io.emit('wordToGuess',obj);
-  })
+socket.on('inscription',function(msg){
+  console.log('inscription');
+  let obj = listOfUsers.find(o => o.id === socket.id);
+  obj.name = msg;
+  console.log(obj);
+  io.emit('inscription',obj);
+})
 
 
-
-  socket.on('wordGuessTest',function(msg){
-    console.log('wordGuessTest');
-    let wordToGuess = listOfUsers.find(o => o.id === socket.id).word;
-    if(wordGuessTest==msg)
-    {
-      console.log("MOT TROUVE!!!!!!!!!!!!!");
-    }
-    console.log(obj);
-    io.emit('wordToGuess',obj);
-  })
-
-  
+socket.on('wordRequest',function(msg){
+  console.log('wordRequest');
+  let obj = listOfUsers.find(o => o.id === socket.id);
+  obj.word= msg;
+  let obj2 =listOfUsers.find(o => o.id === socket.id).nemesis;
+  obj2.word = msg;
+  console.log(obj);
+  io.emit('wordToGuess',obj);
+})
 
 
 
-  socket.on('hey',function(msg){
+socket.on('wordGuessTest',function(msg){
+  console.log('wordGuessTest');
+  let wordToGuess = listOfUsers.find(o => o.id === socket.id).word;
+  if(wordGuessTest==msg)
+  {
+    console.log("MOT TROUVE!!!!!!!!!!!!!");
+  }
+  console.log(obj);
+  io.emit('wordToGuess',obj);
+})
+
+
+
+
+
+socket.on('hey',function(msg){
   console.log('hey reception');
   console.log(socket.id);
   console.log(msg);
@@ -96,27 +96,32 @@ io.on('connection', function(socket){
 
 
 
-socket.on('pairfing',(msg)=>{
-console.log('pairing');
+socket.on('pairing',(msg)=>{
+  console.log('pairing');
+  let room = uuid.v4();
+  let socket = io.sockets.connected[socket.id];
+  socket.join(room);
+  socket = io.sockets.connected[msg];
+  socket.join(room);
   let obj = listOfUsers.find(o => o.id === socket.id);
-  listOfUsers[listOfUsers.indexOf(obj)].nemesis = msg;
+  listOfUsers[listOfUsers.indexOf(obj)].nemesis = room;
   let obj2 = listOfUsers.find(o => o.id === msg);
-  listOfUsers[listOfUsers.indexOf(obj2)].nemesis = socket.id;
+  listOfUsers[listOfUsers.indexOf(obj2)].nemesis = room;
   console.log(listOfUsers);
 })
 
 
 
 
-  socket.on("disconnect", () => {
-    io.emit('desincription',socket.id);
-    console.log('desincription');
-    let obj = listOfUsers.find(o => o.id === socket.id);
-    remove(listOfUsers,obj);
-    sequenceNumberByClient.delete(socket);
+socket.on("disconnect", () => {
+  io.emit('desincription',socket.id);
+  console.log('desincription');
+  let obj = listOfUsers.find(o => o.id === socket.id);
+  remove(listOfUsers,obj);
+  sequenceNumberByClient.delete(socket);
 
-    console.info(`Client gone [id=${socket.id}]`);
-  });
+  console.info(`Client gone [id=${socket.id}]`);
+});
 });
 
 server.listen(4200);
@@ -140,18 +145,22 @@ var line_history = [];
 // event-handler for new incoming connections
 io.on('connection', function (socket) {
 
-   // first send the history to the new client
-   for (var i in line_history) {
-      socket.emit('draw_line', { line: line_history[i] } );
-   }
+  // first send the history to the new client
+  for (var i in line_history) {
+    socket.emit('draw_line', { line: line_history[i] } );
+  }
 
-   // add handler for message type "draw_line".
-   socket.on('draw_line', function (data) {
-      // add received line to history 
-      line_history.push(data.line);
-      // send line to all clients
-      console.log("SENDLine")
-      io.emit('draw_line', { line: data.line });
-         console.log("SENTLine")
-   });
+  // add handler for message type "draw_line".
+  socket.on('draw_line', function (data) {
+
+  let obj = listOfUsers.find(o => o.id === socket.id);
+    line_history.push(data.line);
+// send line to room
+  io.sockets.to(obj.nemesis).emit('draw_line', {message: "details"});
+    // add received line to history
+    // send line to all clients
+    console.log("SENDLine")
+    // io.emit('draw_line', { line: data.line });
+    console.log("SENTLine")
+  });
 });

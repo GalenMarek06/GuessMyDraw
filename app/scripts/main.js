@@ -1,5 +1,5 @@
 $( document ).ready(function() {
- 
+
           var socket = io();
 
           $("#btn_GenerateWord").on("click",generateWord);
@@ -125,6 +125,11 @@ $( document ).ready(function() {
             addUser(data);
           });
 
+          socket.on('pairing'()=>{
+            $('#' + data + ' > .playerConnection').text('en jeu');
+            $('#' + socket.id + ' > .playerConnection').text('en jeu');
+          })
+
 
           socket.on('desincription',function(id){
             console.log('desinscription');
@@ -136,7 +141,7 @@ $( document ).ready(function() {
 
 
 
-       var mouse = { 
+       var mouse = {
           click: false,
           move: false,
           pos: {x:0, y:0},
@@ -149,12 +154,12 @@ $( document ).ready(function() {
        var contextToGuess = canvasToGuess[0].getContext('2d');
        var width   = $(canvasToDraw).width();
        var height  = $(canvasToDraw).height();
-       
+
 
        // register mouse event handlers
        canvasToDraw.mousedown(function() { mouse.click = true;
      });
-       canvasToDraw.mouseup(function() { mouse.click = false; 
+       canvasToDraw.mouseup(function() { mouse.click = false;
       });
 
        canvasToDraw.mousemove(function( event ) {
@@ -174,7 +179,7 @@ $( document ).ready(function() {
           contextToGuess.lineTo(line[1].x , line[1].y );
           contextToGuess.stroke();
        });
-       
+
        // main loop, running every 25ms
        function mainLoop() {
           // check if the user is drawing
@@ -195,7 +200,3 @@ $( document ).ready(function() {
 
 
 });
-
-
-
-
