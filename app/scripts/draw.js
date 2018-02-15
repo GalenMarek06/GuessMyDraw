@@ -92,11 +92,10 @@ if(window.addEventListener) {
 
         if (tool.started) {
           // context.fillStyle  = "#FF0000";
-          context.strokeStyle  = $( "input[type=color]" ).val();
-          context.lineWidth = "3";
+          context.strokeStyle  = $('input[type=color]').val();
+          context.lineWidth = "2";
           if (ev._x < canvas.width && ev._y < canvas.height) {
             context.lineTo(ev._x, ev._y);
-
             context.stroke();
           }
           else {
