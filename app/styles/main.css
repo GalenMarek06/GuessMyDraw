@@ -255,3 +255,33 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
  /*width:100%;*/
   background-color: white;
 }
+
+#controlsDrawing
+{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-content: center;
+  align-items: center;
+}
+
+#controlsDrawing
+{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+  align-content: center;
+  align-items: center;
+  width:50%;
+}
+
+#controlsDrawing > input,
+#controlsDrawing #line_Wmin,
+#controlsDrawing #line_Wnormal,
+#controlsDrawing #line_Wlarge
+{
+  width: 15%;
+  background-color: blue;
+  text-align: center;
+  padding:1%;
+}
