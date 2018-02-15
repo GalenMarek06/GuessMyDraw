@@ -2,7 +2,6 @@
 * http://www.robodesign.ro
 */
 var socket = io();
-
 // Keep everything in anonymous function, called on window load.
 if(window.addEventListener) {
   window.addEventListener('load', function () {
@@ -11,27 +10,22 @@ if(window.addEventListener) {
 
     function init () {
       // Find the canvas element.
-
       canvas = document.getElementById('canvasWordToDraw');
       canvasToGuess = document.getElementById('canvasWordToGuess');
       if (!canvas) {
         alert('Error: I cannot find the canvas element!');
         return;
       }
-
       if (!canvas.getContext) {
         alert('Error: no canvas.getContext!');
         return;
       }
-
       // Get the 2D canvas context.
       context = canvas.getContext('2d');
       if (!context) {
         alert('Error: failed to getContext!');
         return;
       }
-
-
       // Pencil tool instance.
       tool = new tool_pencil();
       /*tool.strokeStyle  = "#FF0000";*/
@@ -67,12 +61,9 @@ if(window.addEventListener) {
     function tool_pencil () {
       var tool = this;
       this.started = false;
-
       // This is called when you start holding down the mouse button.
       // This starts the pencil drawing.
       this.mousedown = function (ev) {
-
-
         if (ev._x > canvas.width&&ev._y>canvas.height){
           context.moveTo(ev.offsetX, ev.offsetY);
           context.beginPath();
@@ -83,8 +74,6 @@ if(window.addEventListener) {
           context.beginPath();
           tool.started = true;
         }
-
-
       };
 
 
@@ -98,11 +87,8 @@ if(window.addEventListener) {
       // draws if the tool.started state is set to true (when you are holding down
       // the mouse button).
       this.mousemove = function (ev) {
-
         if (tool.started) {
-          // context.fillStyle  = "#FF0000";
           context.strokeStyle  = $('input[type=color]').val();
-
           context.lineWidth = lineWidthDraw;
           if (ev._x < canvas.width && ev._y < canvas.height) {
             context.lineTo(ev._x, ev._y);
@@ -112,18 +98,15 @@ if(window.addEventListener) {
             context.lineTo(ev.offsetX, ev.offsetY);
             context.stroke();
           }
-
+          socket.emit('canvas', canvas.toDataURL());
         }
       };
 
       // This is called when you release the mouse button.
       this.mouseup = function (ev) {
-
         if (tool.started) {
           tool.mousemove(ev);
           tool.started = false;
-          console.log('mouse up canvas sending');
-          socket.emit('canvas', canvas.toDataURL());
         }
       };
     }
