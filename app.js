@@ -82,7 +82,7 @@ io.on('connection', function(socket){
     io.emit('wordToGuess',obj);
   })
 
-  
+
 
 
 
@@ -96,12 +96,18 @@ io.on('connection', function(socket){
 
 
 
-socket.on('pairfing',(msg)=>{
+socket.on('pairing',(msg)=>{
 console.log('pairing');
+
+  let room = Math.random();
   let obj = listOfUsers.find(o => o.id === socket.id);
-  listOfUsers[listOfUsers.indexOf(obj)].nemesis = msg;
+  listOfUsers[listOfUsers.indexOf(obj)].nemesis = room;
+  listOfUsers[listOfUsers.indexOf(obj)].status = status.INGAME;
   let obj2 = listOfUsers.find(o => o.id === msg);
-  listOfUsers[listOfUsers.indexOf(obj2)].nemesis = socket.id;
+  listOfUsers[listOfUsers.indexOf(obj2)].nemesis = room;
+  listOfUsers[listOfUsers.indexOf(obj2)].status = status.INGAME;
+  io.sockets.emit('pairing', [msg,socket.id,status.INGAME])
+
   console.log(listOfUsers);
 })
 
@@ -147,11 +153,16 @@ io.on('connection', function (socket) {
 
    // add handler for message type "draw_line".
    socket.on('draw_line', function (data) {
-      // add received line to history 
+      // add received line to history
       line_history.push(data.line);
       // send line to all clients
-      console.log("SENDLine")
-      io.emit('draw_line', { line: data.line, color: data.color, width: data.width });
-         console.log("SENTLine")
+      let reciver = listOfUsers.find(o => o.id === socket.id)
+
+      socket.broadcast.to(reciver.nemesis).emit('draw_line', { line: data.line} );
+
+
+      //console.log("SENDLine")
+    //  io.emit('draw_line', { line: data.line });
+        // console.log("SENTLine")
    });
 });

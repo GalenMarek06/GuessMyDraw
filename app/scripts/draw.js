@@ -1,12 +1,12 @@
 /* © 2009 ROBO Design
 * http://www.robodesign.ro
 */
+var socket = io();
 
 // Keep everything in anonymous function, called on window load.
 if(window.addEventListener) {
   window.addEventListener('load', function () {
     var canvas, canvasToGuess, context, tool;
-    var socket = io();
     var lineWidthDraw = "2";
 
     function init () {

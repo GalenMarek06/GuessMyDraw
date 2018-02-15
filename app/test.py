@@ -26,7 +26,7 @@ inputElement2.submit()
 
 mytext = driver.find_elements_by_xpath("(//*[contains(text(), 'player1')] | //*[@value='player'])")
 mytext[0].click()
-#time.sleep()
+# time.sleep(5)
 
 
 driver1.switch_to.alert.accept()

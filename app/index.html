@@ -9,7 +9,7 @@
         <title>GuessMyDraw</title>
 
         <link rel="stylesheet" href="styles/main.css" />
-        <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">       
+        <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,19 +19,19 @@
     <body>
         <section id="mainScreen">
             <div class= guessMyDrawContainer>
-                 <img id="titleMain" src="images/GuessMyDraw.png" alt="Smiley face"> 
-                
+                 <img id="titleMain" src="images/GuessMyDraw.png" alt="Smiley face">
+
                 <form id="playerInfo">
                          <label>Votre nom:</label><br>
-                         <input id="playerName" type="text" name="playerName"><br>    
-                         <div id="btn_findGame">Trouver partie </div>  
+                         <input id="playerName" type="text" name="playerName"><br>
                 </form>
-                 
+                         <div id="btn_findGame">Trouver partie </div>  
+
             </div>
         </section>
         <section id="playersRoomScreen">
             <div id="playersList" class= "guessMyDrawContainer">
-                 <span id="titleSession">Recherche de partie</span> 
+                 <span id="titleSession">Recherche de partie</span>
                  <div id="playersRoomHeader">
                     <label id="playersAvailable">Joueurs</label>
                     <label id="playersStatus">Status</label>
@@ -44,11 +44,11 @@
                     <label class="playerName">GamerDu78</label>
                     <label class="playerConnection">OK</label>
                  </div> -->
-                 
+
             </div>
             <span id="infoSession"> La partie va commencer... </span>
         </section>
-        
+
 
         <section id="gameScreen">
             <div id="findWordScreen" class= "guessMyDrawContainer">
@@ -70,21 +70,21 @@
                 <span id="titleDrawWord"> Dessinez le mot </span>
                 <span id="wordToDraw"> VOITURE </span>
                 <canvas id="canvasWordToDraw" width="400" height="400" style="border:1px solid #000000;">
-                </canvas> 
+                </canvas>
                 <div id="controlsDrawing">
-                    <input type="color" value="#ff0000"> 
+                    <input type="color" value="#ff0000">
                     <div class="drawWidth" data-width="2">Thin</div>
                     <div class="drawWidth" data-width="4">Normal</div>
-                    <div class="drawWidth" data-width="8">Large</div>      
+                    <div class="drawWidth" data-width="8">Large</div>
                 </div>
-              
+
             </div>
             <div id="guessWordScreen" class= "guessMyDrawContainer">
                 <div id="guessHeader">
                     <span id="titleGuessWord"> Devinez le mot </span>
                 </div>
                 <canvas id="canvasWordToGuess" width="400" height="400" style="border:1px solid #000000;">
-                </canvas> 
+                </canvas>
                 <div id= "playerResponse">
                     <span id="titleResponse"> Votre réponse : </span>
                     <input type="text" name="inputResponse"><br>
@@ -93,11 +93,10 @@
             </div>
         </section>
 
-       
+
         <script src="http://localhost:4200/socket.io/socket.io.js"></script>
          <script src="scripts/main.js"></script>
         <script src="scripts/draw.js"></script>
     </body>
 
 </html>
-
