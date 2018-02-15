@@ -39,7 +39,8 @@ if(window.addEventListener) {
       canvas.addEventListener('mousedown', ev_canvas, false);
       canvas.addEventListener('mousemove', ev_canvas, false);
       canvas.addEventListener('mouseup',   ev_canvas, false);
-      socket.on('canvas',function(msg){
+      socket.on('canvasToDraw',function(msg){
+        console.log('canvas client');
         deserialize(msg,canvasToGuess);
       })
 
@@ -121,6 +122,7 @@ if(window.addEventListener) {
         if (tool.started) {
           tool.mousemove(ev);
           tool.started = false;
+          console.log('mouse up canvas sending');
           socket.emit('canvas', canvas.toDataURL());
         }
       };

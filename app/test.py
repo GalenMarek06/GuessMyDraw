@@ -1,15 +1,12 @@
 from selenium import webdriver
 #import time
 
-#browser = webdriver.Firefox()
 driver = webdriver.Chrome()
 driver1 = webdriver.Chrome()
-driver2 = webdriver.Chrome()
 
 
 driver.get('localhost:4200')
 driver1.get('http://localhost:4200/')
-driver2.get('localhost:4200')
 
 
 inputElement = driver.find_element_by_id("playerName")
@@ -20,6 +17,8 @@ inputElement1 = driver1.find_element_by_id("playerName")
 inputElement1.send_keys("player1")
 inputElement1.submit()
 
+driver2 = webdriver.Chrome()
+driver2.get('localhost:4200')
 inputElement2 = driver2.find_element_by_id("playerName")
 inputElement2.send_keys("player2")
 inputElement2.submit()
