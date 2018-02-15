@@ -46,9 +46,9 @@ io.on('connection', function(socket){
     }
   }
 
-  socket.on('canvas', function(msg){
+ /* socket.on('canvas', function(msg){
     io.emit('canvas', msg);
-  });
+  });*/
 
   socket.on('inscription',function(msg){
     console.log('inscription');
@@ -119,9 +119,7 @@ console.log('pairing');
   });
 });
 
-server.listen(4200, function(){
-  console.log('listening on *:4200');
-});
+server.listen(4200);
 
 
 
@@ -129,3 +127,31 @@ function remove(array, element) {
   const index = array.indexOf(element);
   array.splice(index, 1);
 }
+
+
+
+// add directory with our static files
+app.use(express.static(__dirname + '/public'));
+console.log("Server running on 127.0.0.1:4200");
+
+// array of all lines drawn
+var line_history = [];
+
+// event-handler for new incoming connections
+io.on('connection', function (socket) {
+
+   // first send the history to the new client
+   for (var i in line_history) {
+      socket.emit('draw_line', { line: line_history[i] } );
+   }
+
+   // add handler for message type "draw_line".
+   socket.on('draw_line', function (data) {
+      // add received line to history 
+      line_history.push(data.line);
+      // send line to all clients
+      console.log("SENDLine")
+      io.emit('draw_line', { line: data.line });
+         console.log("SENTLine")
+   });
+});

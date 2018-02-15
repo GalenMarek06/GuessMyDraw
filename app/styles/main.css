@@ -252,6 +252,6 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
 
 #canvasWordToDraw, #canvasWordToGuess
 {
-  width:50%;
+ /*width:100%;*/
   background-color: white;
 }
