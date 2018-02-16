@@ -96,7 +96,7 @@ io.on('connection', function(socket){
 
 
 
-socket.on('pairfing',(msg)=>{
+socket.on('pairing',(msg)=>{
 console.log('pairing');
   let obj = listOfUsers.find(o => o.id === socket.id);
   listOfUsers[listOfUsers.indexOf(obj)].nemesis = msg;

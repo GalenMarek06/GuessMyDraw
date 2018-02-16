@@ -3,7 +3,16 @@ $( document ).ready(function() {
           var socket = io();
 
           $("#btn_GenerateWord").on("click",generateWord);
+          
 
+
+          function initGame()
+          {
+            $("#mainScreen").show();
+            $("#playersRoomScreen").hide();
+            $("#gameScreen").hide();
+            
+          }
 
 
           function generateWord()
@@ -91,6 +100,8 @@ $( document ).ready(function() {
             console.log("Submit");
             //send();
             $('form').submit();
+            $("#mainScreen").hide();
+            $("#playersRoomScreen").show();
           });
 
 
@@ -108,12 +119,18 @@ $( document ).ready(function() {
 
           socket.on('hey',function(data){
           console.log('hey');
-            let c = confirm($('#'+data+' > .playerName').text()+" , vous invité à commener la partie.");
+            let c = confirm($('#'+data+' > .playerName').text()+" , vous invite à commencer une partie.");
             console.log(c);
             if(c === true){
               socket.emit('pairing',data);
               $('#' + data + ' > .playerConnection').text('en jeu');
               $('#' + socket.id + ' > .playerConnection').text('en jeu');
+              $("#playersRoomScreen").hide();
+              $("#gameScreen").show();
+              $("#findWordScreen").show();
+
+              $("#drawWordScreen").hide();
+              $("#guessWordScreen").hide();
             }
 
           })
@@ -189,7 +206,7 @@ $( document ).ready(function() {
           setTimeout(mainLoop, 25);
        }
        mainLoop();
-
+       initGame();
 
 
 
