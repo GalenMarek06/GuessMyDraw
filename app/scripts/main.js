@@ -25,7 +25,7 @@ $( document ).ready(function() {
 
             /*}*/
             $.get( "./word", function( data ) {
-              $( "#wordToDraw" ).text( data );
+              $( "#wordToDraw" ).text( data );  
               $(".sideBackIn").text(data);
               saveWordToGuess();
             });
@@ -60,9 +60,13 @@ $( document ).ready(function() {
 
 
           function saveWordToGuess()
-          {
-            if($("#wordToDraw").val())
+          { 
+            console.log("SAVEWORDTOGUESS");
+            console.log($("#wordToDraw").text());
+
+            if($("#wordToDraw").text())
             {
+              console.log("MOT ENREGISTRE");
               socket.emit('wordRequest',$("#wordToDraw").val());
             }
           }
@@ -137,21 +141,24 @@ $( document ).ready(function() {
           })
 
 
-          socket.on('wordToGuess', function (list)
+          socket.on('wordToGuessDrawer', function ()
           {
-            let role = list.find(o => o.id === socket.id).role;
-            if(role)
-            {
                 $("#drawWordScreen").show();
                 $("#findWordScreen").hide();
                 $("#guessWordScreen").hide();
-            }
-            else
-            {
+                console.log("DESSINATEUR");
+          });
+
+          
+           socket.on('wordToGuessPlayer', function (test)
+          {
+            alert('yolo');
+               $("#playersRoomScreen").hide();
+                $("#gameScreen").show();
                 $("#drawWordScreen").hide();
                 $("#findWordScreen").hide();
+                console.log("DEVINEUR");
                 $("#guessWordScreen").show();
-            }
           });
 
           socket.on('inscription',function(data){

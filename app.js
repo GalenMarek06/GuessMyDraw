@@ -65,10 +65,15 @@ io.on('connection', function(socket){
     obj.word= msg;
     let obj2 =listOfUsers.find(o => o.id === socket.id).nemesis;
     obj2.word = msg;
-    console.log(obj);
+    console.log("OKI DOKI");
+    console.log("ID JOUEUR 1 : " ,obj.id);
+    console.log("ID JOUEUR 2 : ", obj.nemesis);
     setTimeout(function()
       {
-        io.sockets.emit('wordToGuess',listOfUsers);
+          //socket.broadcast.to(obj.id).emit('wordToGuessDrawer');
+          io.to(obj.id).emit('wordToGuessDrawer');
+          io.to(obj2.id).emit('wordToGuessPlayer');
+          //socket.broadcast.to(obj.id).emit('wordToGuessPlayer');
       },3000);
   })
 
