@@ -1,5 +1,5 @@
 $( document ).ready(function() {
- 
+
           var socket = io();
 
           $("#btn_GenerateWord").on("click",generateWord);
@@ -26,7 +26,8 @@ $( document ).ready(function() {
             /*}*/
             $.get( "./word", function( data ) {
               $( "#wordToDraw" ).text( data );
-              $(".sideBackIn").text(data)
+              $(".sideBackIn").text(data);
+              saveWordToGuess();
             });
 
           }
@@ -135,6 +136,24 @@ $( document ).ready(function() {
 
           })
 
+
+          socket.on('wordToGuess', function (list)
+          {
+            let role = list.find(o => o.id === socket.id).role;
+            if(role)
+            {
+                $("#drawWordScreen").show();
+                $("#findWordScreen").hide();
+                $("#guessWordScreen").hide();
+            }
+            else
+            {
+                $("#drawWordScreen").hide();
+                $("#findWordScreen").hide();
+                $("#guessWordScreen").show();
+            }
+          });
+
           socket.on('inscription',function(data){
             console.log(data);
             addUser(data);
@@ -146,9 +165,6 @@ $( document ).ready(function() {
             $('#'+id).remove();
 
           })
-
-
-
 
 
        var mouse = { 
@@ -209,11 +225,5 @@ $( document ).ready(function() {
        initGame();
 
 
-
-
-
+  
 });
-
-
-
-
