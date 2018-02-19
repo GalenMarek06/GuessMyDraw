@@ -11,6 +11,7 @@ class User {
   }
 }
 
+// invitation du serveur
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -41,7 +42,6 @@ app.get('/word', function (req, res) {
 //quand l'utilisateur se connect on l'ajoute dans la liste et
 // on envoie la notification à tout le monde pour l'ajouter dans la table
 io.on('connection', function(socket){
-  console.log('a user connected');
   listOfUsers.push(new User(socket.id))
   for (var i = 0; i < listOfUsers.length; i++) {
     if(listOfUsers[i].name){
@@ -51,10 +51,8 @@ io.on('connection', function(socket){
 
   //quand l'utilisatuer ajout son nome on l'joute dans la liste des utilisatuers
   socket.on('inscription',function(msg){
-    console.log('inscription');
     let obj = listOfUsers.find(o => o.id === socket.id);
     obj.name = msg;
-    console.log(obj);
     io.emit('inscription',obj);
   })
   //quand l'utilisateur demande un nouveau mot on l'ajoute dans la liste pour
@@ -65,7 +63,6 @@ io.on('connection', function(socket){
     obj.word= msg;
     let obj2 =listOfUsers.find(o => o.id === socket.id).nemesis;
     obj2.word = msg;
-    console.log(obj);
     io.emit('wordToGuess',obj);
   })
 
@@ -77,23 +74,16 @@ io.on('connection', function(socket){
     {
       console.log("MOT TROUVE!!!!!!!!!!!!!");
     }
-    console.log(obj);
     io.emit('wordToGuess',obj);
   })
 
 // envoie de l'invitation de jeu à l'utilisateur choisi
   socket.on('hey',function(msg){
-    console.log('hey reception');
-    console.log(socket.id);
-    console.log(msg);
     socket.broadcast.to(msg).emit('hey',socket.id);
   })
-
 // couplage de deux utilisatuers qui vont jouer ensemble
   socket.on('pairing',(msg)=>{
-    console.log('pairing');
     let room = Math.random();
-    
     let obj = listOfUsers.find(o => o.id === socket.id);
     listOfUsers[listOfUsers.indexOf(obj)].nemesis = room;
     listOfUsers[listOfUsers.indexOf(obj)].status = status.INGAME;
@@ -103,10 +93,7 @@ io.on('connection', function(socket){
     // ajout de room pour les deux utilisateurs
     io.sockets.connected[obj.id].join(obj.nemesis);
     io.sockets.connected[obj2.id].join(obj.nemesis);
-
     io.sockets.emit('pairing', [msg,socket.id,status.INGAME])
-
-    console.log(listOfUsers);
   })
 
   socket.on('canvas',function(msg){
@@ -118,8 +105,7 @@ io.on('connection', function(socket){
       // send to all users in the room but sender
       socket.broadcast.to(room).emit('canvasToDraw', msg );
       // send to all users in room
-      //io.sockets.in(room).emit('canvasToDraw', msg );
-
+      // io.sockets.in(room).emit('canvasToDraw', msg );
     }
   })
 
@@ -130,7 +116,6 @@ io.on('connection', function(socket){
     let obj = listOfUsers.find(o => o.id === socket.id);
     remove(listOfUsers,obj);
     sequenceNumberByClient.delete(socket);
-
     console.info(`Client gone [id=${socket.id}]`);
   });
 });

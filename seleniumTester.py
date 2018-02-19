@@ -5,7 +5,6 @@ from selenium import webdriver
 driver = webdriver.Chrome()
 driver1 = webdriver.Chrome()
 
-
 driver.get('localhost:4200')
 driver1.get('http://localhost:4200/')
 
@@ -23,6 +22,18 @@ driver2.get('localhost:4200')
 inputElement2 = driver2.find_element_by_id("playerName")
 inputElement2.send_keys("player2")
 inputElement2.submit()
+
+driver3 = webdriver.Chrome()
+driver3.get('localhost:4200')
+inputElement3 = driver3.find_element_by_id("playerName")
+inputElement3.send_keys("player3")
+inputElement3.submit()
+
+driver4 = webdriver.Chrome()
+driver4.get('localhost:4200')
+inputElement4 = driver4.find_element_by_id("playerName")
+inputElement4.send_keys("player4")
+inputElement4.submit()
 
 mytext = driver.find_elements_by_xpath("(//*[contains(text(), 'player1')] | //*[@value='player'])")
 mytext[0].click()

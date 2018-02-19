@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
   $("#btn_GenerateWord").on("click",generateWord);
+  $("#drawWordScreen").hide();
+  $("#guessWordScreen").hide();
+
+
+
 
   function generateWord()
   {
@@ -54,7 +59,7 @@ $(document).ready(function() {
     }
   }
 
-// méthode d'envoie de nom à tout le monde
+  // méthode d'envoie de nom à tout le monde
   function send()
   {
     console.log("send()");
@@ -66,7 +71,7 @@ $(document).ready(function() {
     }
   }
 
-// form binding
+  // form binding
   $('#playerInfo').submit(function(e){
     e.preventDefault();
     send();
@@ -78,7 +83,7 @@ $(document).ready(function() {
     $('form').submit();
   });
 
-// invitation de joueur pour la partie
+  // invitation de joueur pour la partie
   $('#playersList').on('click','[name="user"]',function(e){
     if(this.parentNode.id !== socket.id){
       socket.emit('hey',this.parentNode.id);
@@ -88,7 +93,7 @@ $(document).ready(function() {
     }
   });
 
-// reception d'invitation
+  // reception d'invitation
   socket.on('hey',function(data){
     console.log('hey');
     let c = confirm($('#'+data+' > .playerName').text()+" , vous invité à commener la partie.");
@@ -97,18 +102,21 @@ $(document).ready(function() {
     }
   })
 
-// ajout de nouveau utilisateur dans la list
+  // ajout de nouveau utilisateur dans la list
   socket.on('inscription',function(data){
     addUser(data);
   });
 
-// suppression d'utilisateur de la liste en deconnexion
+  // suppression d'utilisateur de la liste en deconnexion
   socket.on('desincription',function(id){
     $('#'+id).remove();
   })
 
-// changement de status d'utilisateurs qui font la partie ensemble 
+  // changement de status d'utilisateurs qui font la partie ensemble
   socket.on('pairing',function(data){
+    if (data[0]===socket.id||data[1]===socket.id){
+
+    }
     $('#' + data[0] + ' > .playerConnection').text(data[2].name);
     $('#' + data[1] + ' > .playerConnection').text(data[2].name);
   })
