@@ -63,13 +63,14 @@ io.on('connection', function(socket){
     console.log('wordRequest');
     let obj = listOfUsers.find(o => o.id === socket.id);
     obj.word= msg;
-    let obj2 =listOfUsers.find(o => o.id === socket.id).nemesis;
+    let obj2 =listOfUsers.find(o => (o.nemesis === obj.nemesis) && (o.id!=obj.id));
     obj2.word = msg;
     console.log("OKI DOKI");
     console.log("ID JOUEUR 1 : " ,obj.id);
     console.log("ID JOUEUR 2 : ", obj.nemesis);
     setTimeout(function()
       {
+
           //socket.broadcast.to(obj.id).emit('wordToGuessDrawer');
           io.to(obj.id).emit('wordToGuessDrawer');
           io.to(obj2.id).emit('wordToGuessPlayer');

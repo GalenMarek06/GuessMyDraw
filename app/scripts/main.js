@@ -94,7 +94,7 @@ $( document ).ready(function() {
           }
 
           $('#playerInfo').submit(function(e){
-
+            console.log("SUBMIT PLAYER");
             e.preventDefault();
             send();
             return;
