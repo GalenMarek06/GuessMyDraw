@@ -5,14 +5,20 @@ $(document).ready(function() {
   $("#guessWordScreen").hide();
 
 
-
+  function initGame()
+  {
+      $("#mainScreen").show();
+      $("#playersRoomScreen").hide();
+      $("#gameScreen").hide();          
+  }
 
   function generateWord()
   {
     $('.card').css("transform","rotateY(180deg)" );
     $.get( "./word", function( data ) {
       $( "#wordToDraw" ).text( data );
-      $(".sideBackIn").text(data)
+      $(".sideBackIn").text(data);
+      saveWordToGuess();
     });
   }
 
@@ -44,10 +50,11 @@ $(document).ready(function() {
 
   function saveWordToGuess()
   {
-    if($("#wordToDraw").val())
-    {
-      socket.emit('wordRequest',$("#wordToDraw").val());
-    }
+     if($("#wordToDraw").text())
+            {
+              console.log("MOT ENREGISTRE");
+              socket.emit('wordRequest',$("#wordToDraw").val());
+            }
   }
 
 
@@ -81,6 +88,8 @@ $(document).ready(function() {
 
   $('#btn_findGame').on('click',function(e){
     $('form').submit();
+    $("#mainScreen").hide();
+    $("#playersRoomScreen").show();
   });
 
   // invitation de joueur pour la partie
@@ -99,8 +108,36 @@ $(document).ready(function() {
     let c = confirm($('#'+data+' > .playerName').text()+" , vous invité à commener la partie.");
     if(c === true){
       socket.emit('pairing',data);
+       $("#playersRoomScreen").hide();
+              $("#gameScreen").show();
+              $("#findWordScreen").show();
+
+              $("#drawWordScreen").hide();
+              $("#guessWordScreen").hide();
+
     }
   })
+
+  socket.on('wordToGuessDrawer', function ()
+  {
+      $("#drawWordScreen").show();
+      $("#findWordScreen").hide();
+      $("#guessWordScreen").hide();
+      console.log("DESSINATEUR");
+ });
+
+          
+  socket.on('wordToGuessPlayer', function (test)
+  {
+     alert('yolo');
+    $("#playersRoomScreen").hide();
+    $("#gameScreen").show();
+    $("#drawWordScreen").hide();
+    $("#findWordScreen").hide();
+    console.log("DEVINEUR");
+    $("#guessWordScreen").show();
+  });
+
 
   // ajout de nouveau utilisateur dans la list
   socket.on('inscription',function(data){
@@ -120,4 +157,7 @@ $(document).ready(function() {
     $('#' + data[0] + ' > .playerConnection').text(data[2].name);
     $('#' + data[1] + ' > .playerConnection').text(data[2].name);
   })
+
+   initGame();
+   
 });

@@ -1,7 +1,12 @@
+html
+{
+  background-color: #0677bd;
+}
+
 section
 {
-  /* display:flex;
-  flex-direction: column; */
+  display:flex;
+  flex-direction: column;
   align-content: center;
   justify-content: center;
   align-items: center;
@@ -13,11 +18,12 @@ section
 
 .guessMyDrawContainer
 {
-    background-color: #ffd101;
+  background-color: #ffd101;
+    background-image: url("../images/backgnd_draw.png");
     width:60vw;
-    height: 90vh;
-    /* display:flex;
-    flex-direction: column; */
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: flex-start;
@@ -44,9 +50,10 @@ section
 }
 
 
-#playerInfo input[name="playerName"]
+#playerInfo input[name="playerName"] 
 {
   background-color: white;
+  width:100%;
 }
 
 #mainScreen #btn_findGame , #findWordScreen  #btn_GenerateWord
@@ -54,12 +61,14 @@ section
   color:#ffd101;
   font-family: 'Bangers', cursive;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
   background-color: #0677bd;
+  width:50%;
+  height:5vh;
   text-align: center;
   padding-top:10px;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   margin-bottom: 20px;
   -webkit-box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
 -moz-box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
@@ -90,7 +99,7 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
   flex-direction: row;
   font-size: 25px;
   font-weight: bold;
-
+  
 }
 
 #playersRoomHeader #playersAvailable
@@ -118,6 +127,7 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
 
 .playerGame
 {
+  width: 100%;
   display: flex;
   flex-direction: row;
   font-size: 20px;
@@ -156,7 +166,7 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
 {
   color: #5b7cd3;
   padding: 10px;
-  font-size: 45px;
+  font-size: 3em;
   -webkit-text-stroke: 2px black;
   margin-bottom: 50px;
 }
@@ -172,7 +182,6 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
 }
 
 
-
 #wordToDraw
 {
   font-family: 'Oswald', sans-serif;
@@ -180,8 +189,6 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
   font-weight: bold;
   font-size: 50px;
 }
-
-
 
 .card-container {
   height: 300px;
@@ -201,10 +208,7 @@ box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
 -moz-box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
 box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
 }
-/*.card:hover {
-  transform: rotateY(180deg);
-}
-*/
+
 .card .side {
   background: white;
   backface-visibility: hidden;
@@ -212,6 +216,7 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
   height: 100%;
   position: absolute;
   overflow: hidden;
+  width: 100%;
   text-align: center;
   line-height: 300px;
   padding: 2%;
@@ -219,6 +224,8 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
 
 .sideIn, .sideBackIn
 {
+  width:100%;
+  height: 100%;
   background-color: white;
   border-radius: 6px;
   border: 2px solid black;
@@ -256,19 +263,19 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
   justify-content:space-evenly;
   align-content: center;
   align-items: center;
-  width:50%;
+  width:70%;
   margin:2%;
 }
 
 #controlsDrawing > input,
 #controlsDrawing .drawWidth
-
 {
-  width: 15%;
+  width: 20%;
   background-color: #5571db;
   text-align: center;
   padding:1%;
   border: 2px solid black;
+  font-size: 0.8em;
 }
 
 #controlsDrawing .drawWidth:hover
@@ -284,15 +291,8 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
   justify-content:space-evenly;
   align-content: center;
   align-items: center;
-  width:50%;
+  width:100%;
   margin:2%;
-}
-
-
-#playerResponse > input,
-#playerResponse #titleResponse
-{
-  width: 25%;
 }
 
 #playerResponse > input,
@@ -308,4 +308,232 @@ box-shadow: 10px 9px 5px 4px rgba(0,0,0,1);
   text-align: center;
   padding:1%;
   border: 2px solid black;
+  font-size: 0.8em;
 }
+
+
+@media(max-width:767px)
+{
+ html
+ {
+  background-color: #0677bd;
+ }
+
+#playersRoomHeader
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  font-weight: bold;
+  
+}
+
+ .guessMyDrawContainer
+{
+  background-color: #ffd101;
+    background-image: url("../images/backgnd_draw.png");
+    width:70vw;
+    height: 60vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+ .guessMyDrawContainer #findWordScreen
+{
+  background-color: #ffd101;
+    background-image: url("../images/backgnd_draw.png");
+    width:70vw;
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+
+ #controlsDrawing > input,
+#controlsDrawing .drawWidth
+{
+  width: 20%;
+  background-color: #5571db;
+  text-align: center;
+  padding:1%;
+  border: 2px solid black;
+  font-size: 0.5em;
+}
+
+#controlsDrawing .drawWidth:hover
+{
+  cursor:pointer;
+  background-color: #899ce3;
+}
+
+#playerResponse
+{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+  align-content: center;
+  align-items: center;
+  width:100%;
+  margin:2%;
+}
+
+#playerResponse > input,
+#playerResponse #titleResponse
+{
+  width: 30%;
+}
+
+#playerResponse #btn_Submit
+{
+  width: 15%;
+  background-color: #5571db;
+  text-align: center;
+  padding:1%;
+  border: 2px solid black;
+  font-size: 0.5em;
+}
+
+#mainScreen #btn_findGame , #findWordScreen  #btn_GenerateWord
+{
+  color:#ffd101;
+  font-family: 'Bangers', cursive;
+  font-weight: bold;
+  font-size: 25px;
+  background-color: #0677bd;
+  width:50%;
+  height:5vh;
+  text-align: center;
+  padding-top:10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
+-moz-box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
+box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
+}
+
+#titleMain
+{
+  width: 90%;
+  height: 20vh;
+
+}
+
+#titleSession, #titleFindWord, #titleGuessWord
+{
+  color: #5b7cd3;
+  padding: 10px;
+  font-size: 2em;
+  -webkit-text-stroke: 2px black;
+  margin-bottom: 50px;
+}
+
+
+}
+
+@media(max-width:480px)
+{
+
+   html
+ {
+  background-color: #0677bd;
+ }
+
+ #playersRoomHeader
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#controlsDrawing > input,
+#controlsDrawing .drawWidth
+{
+  width: 20%;
+  background-color: #5571db;
+  text-align: center;
+  padding:1%;
+  border: 2px solid black;
+  font-size: 0.4em;
+}
+
+#controlsDrawing .drawWidth:hover
+{
+  cursor:pointer;
+  background-color: #899ce3;
+}
+
+#playerResponse
+{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+  align-content: center;
+  align-items: center;
+  width:100%;
+  margin:2%;
+}
+
+#playerResponse > input,
+#playerResponse #titleResponse
+{
+  width: 30%;
+}
+
+#playerResponse #btn_Submit
+{
+  width: 15%;
+  background-color: #5571db;
+  text-align: center;
+  padding:1%;
+  border: 2px solid black;
+  font-size: 0.4em;
+}
+
+
+ #mainScreen #btn_findGame , #findWordScreen  #btn_GenerateWord
+{
+  color:#ffd101;
+  font-family: 'Bangers', cursive;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #0677bd;
+  width:50%;
+  height:5vh;
+  text-align: center;
+  padding-top:10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
+-moz-box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
+box-shadow: 8px 7px 5px -3px rgba(0,0,0,1);
+}
+
+#titleMain
+{
+  width: 100%;
+  height: 15vh;
+
+}
+
+#titleSession, #titleFindWord, #titleGuessWord
+{
+  color: #5b7cd3;
+  padding: 10px;
+  font-size: 1.5em;
+  -webkit-text-stroke: 2px black;
+  margin-bottom: 50px;
+}
+
+}
+
