@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   $("#btn_GenerateWord").on("click",generateWord);
+  $("btn_Submit").on("click",testWordToGuess);
   $("#drawWordScreen").hide();
   $("#guessWordScreen").hide();
 
