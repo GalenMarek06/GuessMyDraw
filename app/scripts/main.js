@@ -9,7 +9,7 @@ $(document).ready(function() {
   {
       $("#mainScreen").show();
       $("#playersRoomScreen").hide();
-      $("#gameScreen").hide();          
+      $("#gameScreen").hide();
   }
 
   function generateWord()
@@ -66,31 +66,6 @@ $(document).ready(function() {
     }
   }
 
-  // méthode d'envoie de nom à tout le monde
-  function send()
-  {
-    console.log("send()");
-    if($('#playerName').val())
-    {
-      console.log("nomjoueur");
-      socket.emit('inscription',$('#playerName').val());
-      $('#playerName').val('');
-    }
-  }
-
-  // form binding
-  $('#playerInfo').submit(function(e){
-    e.preventDefault();
-    send();
-    return;
-  });
-
-
-  $('#btn_findGame').on('click',function(e){
-    $('form').submit();
-    $("#mainScreen").hide();
-    $("#playersRoomScreen").show();
-  });
 
   // invitation de joueur pour la partie
   $('#playersList').on('click','[name="user"]',function(e){
@@ -126,7 +101,7 @@ $(document).ready(function() {
       console.log("DESSINATEUR");
  });
 
-          
+
   socket.on('wordToGuessPlayer', function (test)
   {
      alert('yolo');
@@ -159,5 +134,36 @@ $(document).ready(function() {
   })
 
    initGame();
-   
+
 });
+
+
+
+
+  // méthode d'envoie de nom à tout le monde
+  function send()
+  {
+    console.log("send()");
+    if($('#playerName').val())
+    {
+      console.log("nomjoueur");
+      socket.emit('inscription',$('#playerName').val());
+      $('#playerName').val('');
+    }
+  }
+
+  // form binding
+  $('#playerInfo').submit(function(e){
+    e.preventDefault();
+    console.log('lkjlkjlkjlkjlkjljlkj');
+    send();
+    $("#mainScreen").hide();
+    $("#playersRoomScreen").show();
+    return;
+  });
+
+
+  $('#btn_findGame').on('click',function(e){
+    console.log('on click funciton ');
+    $('form').submit();
+  });
