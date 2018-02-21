@@ -98,6 +98,7 @@ if(window.addEventListener) {
             context.lineTo(ev.offsetX, ev.offsetY);
             context.stroke();
           }
+          console.log("DESSINE");
           socket.emit('canvas', canvas.toDataURL());
         }
       };
@@ -115,6 +116,7 @@ if(window.addEventListener) {
     // position relative to the canvas element.
     function ev_canvas (ev) {
       if (ev.layerX || ev.layerX == 0) { // Firefox
+        ev.firefox = true;
         ev._x = ev.layerX;
         ev._y = ev.layerY;
       } else if (ev.offsetX || ev.offsetX == 0) { // Opera

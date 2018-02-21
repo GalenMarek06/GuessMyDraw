@@ -59,11 +59,19 @@ io.on('connection', function(socket){
   //la paire de joueurs
   socket.on('wordRequest',function(msg){
     console.log('wordRequest');
+    console.log('wordRequest');
     let obj = listOfUsers.find(o => o.id === socket.id);
     obj.word= msg;
-    let obj2 =listOfUsers.find(o => o.id === socket.id).nemesis;
+    let obj2 =listOfUsers.find(o => (o.nemesis === obj.nemesis) && (o.id!=obj.id));
     obj2.word = msg;
-    io.emit('wordToGuess',obj);
+    setTimeout(function()
+      {
+
+          //socket.broadcast.to(obj.id).emit('wordToGuessDrawer');
+          io.to(obj.id).emit('wordToGuessDrawer');
+          io.to(obj2.id).emit('wordToGuessPlayer');
+          //socket.broadcast.to(obj.id).emit('wordToGuessPlayer');
+      },3000);
   })
 
 
