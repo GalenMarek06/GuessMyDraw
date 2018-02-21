@@ -81,6 +81,7 @@ io.on('connection', function(socket){
   socket.on('hey',function(msg){
     socket.broadcast.to(msg).emit('hey',socket.id);
   })
+
 // couplage de deux utilisatuers qui vont jouer ensemble
   socket.on('pairing',(msg)=>{
     let room = Math.random();
